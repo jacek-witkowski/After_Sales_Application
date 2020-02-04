@@ -1,9 +1,8 @@
 package pl.coderslab.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import pl.coderslab.validator.Phone;
+
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 @Entity
@@ -13,13 +12,18 @@ public class Specialist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "first_name")
     private String firstName; // zwalidować!
 
+    @Column(name = "last_name")
     private String lastName; // zwalidować!
 
+    @Column(name = "email")
     @Email
     private String email;
 
+    @Column(name = "phone")
+    @Phone
     private String phone; // zwalidować!
 
     private String specialty; // pole połączone z "Manufacturer"

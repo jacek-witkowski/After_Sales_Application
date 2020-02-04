@@ -1,5 +1,7 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -39,6 +41,7 @@ public class Action {
             Float workTime;
 
     @Column(name = "report_link")
+// pole generowane przez aplikację - nie ma potrzeby walidacji
     String reportLink;
 
     @Column(name = "recomendation")

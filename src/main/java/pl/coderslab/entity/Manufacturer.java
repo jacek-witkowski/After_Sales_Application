@@ -1,5 +1,9 @@
 package pl.coderslab.entity;
 
+import pl.coderslab.validator.City;
+import pl.coderslab.validator.Phone;
+import pl.coderslab.validator.PostalCode;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -9,69 +13,76 @@ import javax.validation.constraints.Size;
 @Entity
 public class Manufacturer {
 
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @NotEmpty
     @Column(name = "name")
+    @NotEmpty
+    @Size(min = 3, max = 30)
     private String name;
 
     @Column(name = "postal_code")
+    @PostalCode
     private String postalCode; // zwalidować kod pocztowy
 
+    @Column(name = "city")
     @NotNull
     @Size(min = 3, max = 30)
-    @Column(name = "city")
+    @City
     private String city;
 
+    @Column(name = "street")
     @NotNull
     @Size(min = 3, max = 30)
-    @Column(name = "street")
     private String street;
 
+    @Column(name = "bldg_number")
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "bldg_number")
     private String bldgNumber;
 
-    @NotNull
     @Column(name = "country")
+    @NotNull
     private String country; // państwo wybierane z listy
 
-    @Email
     @Column(name = "main_email")
+    @Email
     private String mainEmail;
 
     @Column(name = "main_phone")
+    @Phone
     private String mainPhone; // zwalidować!
 
     @Column(name = "main_fax")
+    @Phone
     private String mainFax; // zwalidować tak jak telefon!
 
     @Column(name = "website")
     private String webSite; // zwalidować!
 
-    @Size(min = 2, max = 20)
     @Column(name = "contact_first_name")
+    @Size(min = 2, max = 20)
     private String contactFirstName; // zwalidować!
 
-    @Size(min = 2, max = 30)
     @Column(name = "contact_last_name")
+    @Size(min = 2, max = 30)
     private String contactLastName; // zwalidować!
 
     @Column(name = "contact_position")
     private String contactPosition;
 
-    @Email
     @Column(name = "contact_email")
+    @Email
     private String contactEmail;
 
     @Column(name = "contact_phone")
+    @Phone
     private String contactPhone; // zwalidować!
 
     @Column(name = "contact_fax")
+    @Phone
     private String contactFax; // zwalidować tak jak telefon!
 
 

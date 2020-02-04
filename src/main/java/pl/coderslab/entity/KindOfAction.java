@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull;
 @Entity(name = "kind_of_action")
 public class KindOfAction {
 
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
     @NotNull

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "machine_type")
 public class MachineType {
 
     @Column(name = "id")
@@ -18,6 +19,8 @@ public class MachineType {
     @NotNull
     private String type;
 
+    @ManyToOne(mappedBy = "")
+    private MachineType machineType;
 
     public MachineType() {
     }

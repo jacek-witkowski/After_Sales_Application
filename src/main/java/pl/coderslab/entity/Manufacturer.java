@@ -9,6 +9,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Manufacturer {
@@ -85,6 +89,10 @@ public class Manufacturer {
     @Phone
     private String contactFax; // zwalidować tak jak telefon!
 
+    @OneToMany(mappedBy = "manufacturer")
+    //@JoinColumn(name="id_type")
+    private List<MachineType> types =
+            new ArrayList<>();
 
     public Manufacturer() {
     }

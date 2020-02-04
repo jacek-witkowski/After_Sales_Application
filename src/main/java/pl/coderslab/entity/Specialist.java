@@ -4,6 +4,8 @@ import pl.coderslab.validator.Phone;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Specialist {
@@ -26,7 +28,10 @@ public class Specialist {
     @Phone
     private String phone; // zwalidować!
 
-    private String specialty; // pole połączone z "Manufacturer"
+    private String specialty; // pole połączone z "ManufacturerRepository"
+
+    @OneToMany(mappedBy = "specialist")
+    private List<Action> actions = new ArrayList<>();
 
     public Specialist() {
     }
@@ -77,5 +82,13 @@ public class Specialist {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
     }
 }

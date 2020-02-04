@@ -94,6 +94,7 @@ public class Manufacturer {
     private List<MachineType> types =
             new ArrayList<>();
 
+
     public Manufacturer() {
     }
 

@@ -3,10 +3,10 @@ package pl.coderslab.entity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "machine")
@@ -33,7 +33,13 @@ public class Machine {
     private LocalDate warrantyExpirationDate;
 
     @ManyToOne
-    MachineType type;
+    private MachineType type;
+
+    @ManyToOne
+    private Owner owner;
+
+    @OneToMany(mappedBy = "machine")
+    private List<Submission> submissions = new ArrayList<>();
 
     public Machine() {
     }
@@ -77,4 +83,30 @@ public class Machine {
     public void setWarrantyExpirationDate(LocalDate warrantyExpirationDate) {
         this.warrantyExpirationDate = warrantyExpirationDate;
     }
+
+    public MachineType getType() {
+        return type;
+    }
+
+    public void setType(MachineType type) {
+        this.type = type;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public List<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(List<Submission> submissions) {
+        this.submissions = submissions;
+    }
+
+
 }

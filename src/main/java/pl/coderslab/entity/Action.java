@@ -42,7 +42,7 @@ public class Action {
 
     @Column(name = "report_link")
 // pole generowane przez aplikację - nie ma potrzeby walidacji
-    String reportLink;
+            String reportLink;
 
     @Column(name = "recomendation")
     @Size(max = 255)
@@ -50,6 +50,15 @@ public class Action {
 
     @Column(name = "next_action")
     String nextAction;
+
+    @ManyToOne
+    private KindOfAction kind;
+
+    @ManyToOne
+    private Specialist specialist;
+
+    @ManyToOne
+    private Submission submission;
 
     public Action() {
     }
@@ -114,7 +123,32 @@ public class Action {
         return nextAction;
     }
 
-    public void setNextActionNeeded(String nextAction) {
+    public void setNextAction(String nextAction) {
         this.nextAction = nextAction;
     }
+
+    public KindOfAction getKind() {
+        return kind;
+    }
+
+    public void setKind(KindOfAction kind) {
+        this.kind = kind;
+    }
+
+    public Specialist getSpecialist() {
+        return specialist;
+    }
+
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
+    }
+
+    public Submission getSubmission() {
+        return submission;
+    }
+
+    public void setSubmission(Submission submission) {
+        this.submission = submission;
+    }
 }
+

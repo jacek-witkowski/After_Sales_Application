@@ -5,14 +5,18 @@ import pl.coderslab.validator.City;
 import pl.coderslab.validator.Phone;
 import pl.coderslab.validator.PostalCode;
 
+//import javax.persistence.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class Client {
+
+public class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,7 +91,10 @@ public class Client {
     @Phone
     private String contactFax; // zwalidować tak jak telefon!
 
-    public Client() {
+    @OneToMany(mappedBy = "owner")
+    List<Machine> machines = new ArrayList<>();
+
+    public Owner() {
     }
 
     public Integer getId() {

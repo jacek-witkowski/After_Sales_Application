@@ -4,6 +4,8 @@ import pl.coderslab.validator.Phone;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "submission")
@@ -41,6 +43,12 @@ public class Submission {
     @NotEmpty
     @Phone
     private String contactPhone; // zwalidować!
+
+    @ManyToOne
+    private Machine machine;
+
+    @OneToMany(mappedBy = "submission")
+    private List<Action> actions = new ArrayList<>();
 
     public Submission() {
     }
@@ -99,5 +107,21 @@ public class Submission {
 
     public void setContactPhone(String contactPhone) {
         this.contactPhone = contactPhone;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
     }
 }

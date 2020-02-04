@@ -2,6 +2,9 @@ package pl.coderslab.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "machine_type")
@@ -19,8 +22,11 @@ public class MachineType {
     @NotNull
     private String type;
 
-    @ManyToOne(mappedBy = "")
-    private MachineType machineType;
+    @ManyToOne
+    private Manufacturer manufacturer;
+
+    @OneToMany(mappedBy = "type")
+    List<Machine> machines = new ArrayList<>();
 
     public MachineType() {
     }

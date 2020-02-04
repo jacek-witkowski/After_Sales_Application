@@ -16,7 +16,6 @@ public class Action {
     @FutureOrPresent
     LocalDate startDate;
 
-
     @Column(name = "end_date")
     @FutureOrPresent
     LocalDate endDate;

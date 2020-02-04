@@ -1,5 +1,10 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.URL;
+import pl.coderslab.validator.City;
+import pl.coderslab.validator.Phone;
+import pl.coderslab.validator.PostalCode;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -16,14 +21,17 @@ public class Client {
 
     @NotEmpty
     @Column(name = "name")
+    @Size(min = 3, max = 30)
     private String name;
 
     @Column(name = "postal_code")
+    @PostalCode
     private String postalCode; // zwalidować kod pocztowy
 
+    @Column(name = "city")
     @NotNull
     @Size(min = 3, max = 30)
-    @Column(name = "city")
+    @City
     private String city;
 
     @NotNull
@@ -45,12 +53,15 @@ public class Client {
     private String mainEmail;
 
     @Column(name = "main_phone")
+    @Phone
     private String mainPhone; // zwalidować!
 
     @Column(name = "main_fax")
+    @Phone
     private String mainFax; // zwalidować tak jak telefon!
 
     @Column(name = "website")
+    @URL
     private String webSite; // zwalidować!
 
     @Size(min = 2, max = 20)
@@ -69,9 +80,11 @@ public class Client {
     private String contactEmail;
 
     @Column(name = "contact_phone")
+    @Phone
     private String contactPhone; // zwalidować!
 
     @Column(name = "contact_fax")
+    @Phone
     private String contactFax; // zwalidować tak jak telefon!
 
     public Client() {

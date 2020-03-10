@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="form"
            uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,6 +48,7 @@
 
 </h4>
 <center>
+
     <table width="942" cellpadding="2" cellspacing="0" style="page-break-after: auto">
         <col width="283">
         <col width="26">
@@ -108,8 +110,8 @@
             <td width="265" style="border: none; padding: 0cm">
                 <h4 class="western" align="center"
                     style="margin-top: 0.2cm; font-variant: normal; letter-spacing: normal; font-style: normal">
-                    <font color="#333333"><font face="Ubuntu"><font size="4" style="font-size: 16pt"><b>Błędny
-                        login lub hasło</b></font></font></font></h4>
+                    <font color="#333333"><font face="Ubuntu"><font size="4" style="font-size: 16pt"><b><c:out
+                            value="${message}"/></b></font></font></font></h4>
             </td>
             <td width="109" style="border: none; padding: 0cm">
                 <p><br/>
@@ -139,8 +141,10 @@
                 style="border-top: none; border-bottom: 2.00pt solid #f58220; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0cm; padding-right: 0cm">
 
                 <div align="center">
-                    <p><font color="#333333"><a href="/login"><input type="button" name="retry" value="Ponów próbę"
-                                                                     style="width: 3.95cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 13pt"/></a></font>
+                    <p><font color="#333333"><a href="${pageContext.request.contextPath}/log-in"><input type="button"
+                                                                                                        name="retry"
+                                                                                                        value="Ponów próbę"
+                                                                                                        style="width: 3.95cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 13pt"/></a></font>
                     </p>
                 </div>
 

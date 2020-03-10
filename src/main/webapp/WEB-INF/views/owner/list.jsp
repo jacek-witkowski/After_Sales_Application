@@ -69,7 +69,7 @@
                 </tr>
                 </tbody>
             </table>
-            <form action="${pageContext.request.contextPath}/client/add" method="post">
+            <form action="${pageContext.request.contextPath}/owner/get" method="get">
                 <table>
                     <tbody>
                     <tr>

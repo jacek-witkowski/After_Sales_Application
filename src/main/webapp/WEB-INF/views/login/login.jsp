@@ -49,36 +49,124 @@
 
 
 <div style="text-align: center;">
+    <table width="942" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+        <col width="279">
+        <col width="22">
+        <col width="261">
+        <col width="105">
+        <col width="235">
+        <tr>
+            <td colspan="5" width="934" valign="top" align="center" style="border: none; padding: 0cm">
+                <h4 class="western"
+                    style="margin-top: 0.2cm; font-variant: normal; letter-spacing: normal; font-style: normal">
+                    <font color="#333333"><font face="Ubuntu"><font size="4" style="font-size: 16pt"><b>Zaloguj
+                        się</b></font></font></font></h4>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td width="279" style="border: none; padding: 0cm">
+                <p style="margin-top: 0.2cm"><br/>
 
-    <h4><b>Zaloguj się</b></h4>
+                </p>
+            </td>
+            <td width="22" style="border: none; padding: 0cm">
+                <p><br/>
 
-    <form:form modelAttribute="user" method="post" action="${pageContext.request.contextPath}/logging">
-        <%--    <form action="${pageContext.request.contextPath}/logging" method="POST">--%>
+                </p>
+            </td>
+            <td width="261" style="border: none; padding: 0cm">
+                <p><br/>
 
-        <p>Login:
+                </p>
+            </td>
+            <td width="105" style="border: none; padding: 0cm">
+                <p><br/>
 
-                <%--                        <label>--%>
-            <form:input path="login" type="text" size="19"
-                        style="width: 5.6cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 14pt; font-weight: bold; background: #dddddd"/><br/>
-            <br/>
-            <form:errors path="login" cssClass="error"/>
-                <%--                        </label>--%>
-        </p>
-        <br/>
+                </p>
+            </td>
+            <td width="235" style="border: none; padding: 0cm">
+                <p><br/>
 
-        <p>Hasło:
-                <%--                        <label>--%>
-            <form:input path="password" type="password" size="19"
-                        style="width: 5.6cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 14pt; font-weight: bold; background: #dddddd"/><br/>
-            <br/>
-            <form:errors path="password" cssClass="error"/>
-                <%--                        </label><br/>--%>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <form:form method="post" modelAttribute="user">
+        <table>
+            <tr valign="top">
+                <td width="279" height="47"
+                    style="border-top: none; border-bottom: none; border-left: none; border-right: 2.00pt solid #f58220; padding-top: 0cm; padding-bottom: 0cm; padding-left: 0cm; padding-right: 0.05cm">
+                    <p style="background: transparent"><br/>
 
-        </p>
-        <br/>
-        <input type="submit" value="Zaloguj"/>
+                    </p>
+                </td>
+                <td width="22" style="border: none; padding: 0cm">
+                    <p><br/>
 
+                    </p>
+                </td>
+                <td width="261" style="border: none; padding: 0cm">
+                    <p>Login:<br/>
 
+                        <label>
+                            <form:input path="login" type="text" size="19"
+                                        style="width: 5.6cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 14pt; font-weight: bold; background: #dddddd"/>
+                            <form:errors path="login" cssClass="error"/>
+                        </label>
+                    </p>
+                </td>
+                <td width="105" style="border: none; padding: 0">
+                    <p><br/>
+
+                    </p>
+                </td>
+                <td width="235" style="border: none; padding: 0">
+                    <p><br/>
+
+                    </p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td width="279"
+                    style="border-top: none; border-bottom: none; border-left: none; border-right: 2.00pt solid #f58220; padding: 0 0.05cm 0 0;">
+                    <p><br/>
+
+                    </p>
+                </td>
+                <td width="22"
+                    style="border-top: none; border-bottom: 2.00pt solid #f58220; border-left: none; border-right: none; padding-top: 0; padding-bottom: 0.1cm; padding-left: 0; padding-right: 0">
+                    <p><br/>
+
+                    </p>
+                </td>
+                <td width="261"
+                    style="border-top: none; border-bottom: 2.00pt solid #f58220; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0cm; padding-right: 0cm">
+                    <p>Hasło:<br/>
+                        <label>
+                            <form:input path="password" type="password" size="19"
+                                        style="width: 5.6cm; height: 0.8cm; font-family: 'Ubuntu'; font-size: 14pt; font-weight: bold; background: #dddddd"/>
+                            <form:errors path="password" cssClass="error"/>
+                        </label><br/>
+                        <br/>
+
+                    </p>
+                </td>
+                <td width="105"
+                    style="border-top: none; border-bottom: 2.00pt solid #f58220; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0cm; padding-right: 0cm">
+                    <div align="left">
+                        <br/>
+                        <input type="submit" value="Zaloguj"
+                               style="width: 2cm; height: 0.8cm; font-family: 'Ubuntu',sans-serif; font-size: 13pt"/>
+
+                    </div>
+                </td>
+                <td width="235" style="border: none; padding: 0">
+                    <p align="center"><br/>
+
+                    </p>
+                </td>
+            </tr>
+        </table>
     </form:form>
 </div>
 

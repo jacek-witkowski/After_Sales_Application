@@ -10,7 +10,7 @@ import pl.coderslab.repository.OwnerRepository;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/client")
+@RequestMapping("/owner")
 public class OwnerController {
 
     private final OwnerRepository ownerRepository;
@@ -41,16 +41,17 @@ public class OwnerController {
     @GetMapping("/all")
     public String showAll(Model model) {
         model.addAttribute("owners", ownerRepository.findAll());
+        model.addAttribute("pageTitle", "<h4>Lista klientów</h4>");
         return "/owner/list";
     }
 
     @GetMapping("/get")
-    public String getOwner(@RequestParam Integer clientId, Model model) {
-        if (ownerRepository.findFirstById(clientId).isPresent()) {
-            model.addAttribute("owner", ownerRepository.findFirstById(clientId).get());
+    public String getOwner(@RequestParam String name, Model model) {
+        if (ownerRepository.findAllByNameContainingIgnoreCase(name).isPresent()) {
+            model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCase(name).get());
         } else return "/owner/none";
-        model.addAttribute("pageTitle", "<h4>Dane klienta</h4>");
-        return "/owner/singleowner";
+        model.addAttribute("pageTitle", "<h4>Znalezieni klienci</h4>");
+        return "/owner/list";
     }
 
     @GetMapping("/edit")

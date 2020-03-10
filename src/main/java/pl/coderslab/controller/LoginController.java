@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.User;
 import pl.coderslab.repository.UserRepository;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -21,41 +20,41 @@ public class LoginController {
     }
 
 
-    @GetMapping("/login")
+    @RequestMapping(value = "/log-in", method = RequestMethod.GET)
     public String loginForm(Model model) {
-        User userToLog = new User();
-        userToLog.setId(0);
-        model.addAttribute("user", userToLog);
+
+        model.addAttribute("user", new User());
         System.out.println("przekazanie do widoku login/login");
         return "login/login";
     }
 
-    @PostMapping("/logging")
-    @ResponseBody
-    public String loginCheck(@ModelAttribute User userToLog)/*(@RequestParam String login, @RequestParam String password)*/ {
-       /* User userToLog = new User();
-        userToLog.setLogin(login);
-        userToLog.setPassword(password);*/
+    @RequestMapping(value = "/log-in", method = RequestMethod.POST)
+    public String loginCheck(@ModelAttribute("user") @Valid User userToLog, BindingResult result, Model model)/*(@RequestParam String login, @RequestParam String password)*/ {
+        if (!result.hasErrors()) {
 
-        //poniżej trzeba wyciągnąć z modelu właściwe parametry.
-        System.out.println("Otrzymano żądanie metodą POST do akcji logging");
-        return "Użytkownik: " + userToLog.getLogin() + "<br/>ma hasło: " + userToLog.getPassword();
+            String login = userToLog.getLogin();
+            String password = userToLog.getPassword();
+            System.out.println("otrzymano żądanie zalogowania użytkownika " + login + " z hasłem " + password);
 
-//        return "/owner/list";
+            if (userRepository.findFirstByLogin(login).isPresent()) {
+                User userInDb = userRepository.findFirstByLogin(login).get();
 
-     /*   if (userRepository.findFirstByLogin(login).isPresent()) {
-            //User userInDb = userRepository.findFirstByLogin(userToLog.getLogin()).get();
-            User registeredUser = userRepository.findFirstByLogin(login).get();
-            if (userToLog.getPassword().equals(registeredUser.getPassword())) {
-                System.out.println("nie wykryto błędów - przekierowanie do /owner/list");
-//                return "redirect:/owner/list";
-                return "/owner/list";
+                if (password.equals(userInDb.getPassword())) {
+                    System.out.println("Znaleziono użytkownika " + login + " i hasło " + password + ". Przekierowanie do /owner/list");
+                    return "redirect:owner/all";
+                } else {
+                    model.addAttribute("message", "Błędne hasło.");
+                    return "login/unsuccessful";
+                }
+
+
             }
-
+            System.out.println("Nie znaleziono użytkownika " + login);
+            model.addAttribute("message", "Nie ma takiego użytkownika.");
+            return "login/unsuccessful";
         }
-        return "/login/unsuccessful";*/
+        return "login/login";
     }
-
 
     @GetMapping("/adduser/{id}/{login}/{password}")
     @ResponseBody
@@ -63,12 +62,13 @@ public class LoginController {
                           @PathVariable String login,
                           @PathVariable String password) {
         User newUser = new User();
-        newUser.setId(id);
+        //newUser.setId(id);
         newUser.setLogin(login);
         newUser.setPassword(password);
         userRepository.save(newUser);
         User retrievedUser = userRepository.findFirstById(id).get();
         return "dodano użytkownika " + retrievedUser.getLogin() + ", hasło: " + retrievedUser.getPassword();
     }
+
 
 }

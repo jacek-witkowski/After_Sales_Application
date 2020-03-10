@@ -8,6 +8,7 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
    }
 
    public boolean isValid(String value, ConstraintValidatorContext context) {
-      return value.matches("(\\d\\s*\\-*){9}");
+       return true;
+       //return value.matches("(\\d\\s*\\-{0,1}){9}");
    }
 }

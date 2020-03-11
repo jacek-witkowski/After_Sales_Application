@@ -41,7 +41,9 @@ public class LoginController {
                 User userInDb = userRepository.findFirstByLogin(login).get();
 
                 if (BCrypt.checkpw(password, userInDb.getHashedPwd())) {
-                    System.out.println("Znaleziono użytkownika " + login + " i hasło " + password + ". Przekierowanie do /owner/list");
+                    System.out.println("Znaleziono użytkownika " + login
+                            + " i hasło " + password
+                            + ". Przekierowanie do /owner/list");
                     return "redirect:owner/all";
                 } else {
                     model.addAttribute("message", "Błędne hasło.");

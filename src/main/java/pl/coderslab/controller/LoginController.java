@@ -1,5 +1,6 @@
 package pl.coderslab.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +40,7 @@ public class LoginController {
             if (userRepository.findFirstByLogin(login).isPresent()) {
                 User userInDb = userRepository.findFirstByLogin(login).get();
 
-                if (password.equals(userInDb.getPassword())) {
+                if (BCrypt.checkpw(password, userInDb.getHashedPwd())) {
                     System.out.println("Znaleziono użytkownika " + login + " i hasło " + password + ". Przekierowanie do /owner/list");
                     return "redirect:owner/all";
                 } else {
@@ -56,18 +57,24 @@ public class LoginController {
         return "login/login";
     }
 
-    @GetMapping("/adduser/{id}/{login}/{password}")
+    @GetMapping("/adduser/{login}/{password}")
     @ResponseBody
-    public String addUser(@PathVariable Integer id,
-                          @PathVariable String login,
+    public String addUser(@PathVariable String login,
                           @PathVariable String password) {
         User newUser = new User();
-        //newUser.setId(id);
         newUser.setLogin(login);
         newUser.setPassword(password);
         userRepository.save(newUser);
-        User retrievedUser = userRepository.findFirstById(id).get();
-        return "dodano użytkownika " + retrievedUser.getLogin() + ", hasło: " + retrievedUser.getPassword();
+        if (userRepository.findFirstByLogin(login).isPresent()) {
+            User retrievedUser = userRepository.findFirstByLogin(login).get();
+            return "dodano użytkownika  o id = " + retrievedUser.getId()
+                    + "<br/>login: " + retrievedUser.getLogin()
+                    + ",<br/>hasło zahaszowane: " + retrievedUser.getHashedPwd()
+                    + "<br/>hasło oryginalne: " + password
+                    + "<br/>czy hasło jest zweryfikowane poprawnie: " + BCrypt.checkpw(password, retrievedUser.getHashedPwd());
+        } else {
+            return "błąd w zapisie do bazy danych";
+        }
     }
 
 

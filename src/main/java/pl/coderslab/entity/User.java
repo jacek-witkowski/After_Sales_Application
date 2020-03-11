@@ -2,11 +2,10 @@ package pl.coderslab.entity;
 
 
 import org.hibernate.validator.constraints.Length;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -15,15 +14,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     @NotNull
     @Length(min = 4, max = 20)
     private String login;
 
-    @Column(name = "password")
-    @NotNull
-    @Length(min = 4, max = 20)
+    /*@Column(name = "password")
+    @NotNull*/
+    @Transient
+    @Length(min = 4, max = 200)
     private String password;
+
+    @Column(name = "encoded_pass")
+    private String hashedPwd;
+
+    @PrePersist
+    @PreUpdate
+    public void encryptPwd() {
+        hashedPwd = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
 
     public User() {
     }
@@ -51,5 +60,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHashedPwd() {
+        return hashedPwd;
+    }
+
+    public void setHashedPwd(String hashedPwd) {
+        this.hashedPwd = hashedPwd;
     }
 }

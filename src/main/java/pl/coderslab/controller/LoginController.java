@@ -20,7 +20,6 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-
     @RequestMapping(value = "/log-in", method = RequestMethod.GET)
     public String loginForm(Model model) {
 
@@ -35,24 +34,16 @@ public class LoginController {
 
             String login = userToLog.getLogin();
             String password = userToLog.getPassword();
-            System.out.println("otrzymano żądanie zalogowania użytkownika " + login + " z hasłem " + password);
 
             if (userRepository.findFirstByLogin(login).isPresent()) {
                 User userInDb = userRepository.findFirstByLogin(login).get();
-
                 if (BCrypt.checkpw(password, userInDb.getHashedPwd())) {
-                    System.out.println("Znaleziono użytkownika " + login
-                            + " i hasło " + password
-                            + ". Przekierowanie do /owner/list");
                     return "redirect:owner/all";
                 } else {
                     model.addAttribute("message", "Błędne hasło.");
                     return "login/unsuccessful";
                 }
-
-
             }
-            System.out.println("Nie znaleziono użytkownika " + login);
             model.addAttribute("message", "Nie ma takiego użytkownika.");
             return "login/unsuccessful";
         }
@@ -69,15 +60,9 @@ public class LoginController {
         userRepository.save(newUser);
         if (userRepository.findFirstByLogin(login).isPresent()) {
             User retrievedUser = userRepository.findFirstByLogin(login).get();
-            return "dodano użytkownika  o id = " + retrievedUser.getId()
-                    + "<br/>login: " + retrievedUser.getLogin()
-                    + ",<br/>hasło zahaszowane: " + retrievedUser.getHashedPwd()
-                    + "<br/>hasło oryginalne: " + password
-                    + "<br/>czy hasło jest zweryfikowane poprawnie: " + BCrypt.checkpw(password, retrievedUser.getHashedPwd());
-        } else {
-            return "błąd w zapisie do bazy danych";
-        }
+        } else return "błąd w zapisie do bazy danych";
+
+        return "pomyślnie utworzono użytkownika: " + login
+                + ", hasło: " + password;
     }
-
-
 }

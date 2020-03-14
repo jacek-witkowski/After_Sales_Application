@@ -69,7 +69,7 @@
                 </tr>
                 </tbody>
             </table>
-            <form action="${pageContext.request.contextPath}/owner/get" method="get">
+            <form action="${pageContext.request.contextPath}/owner/search" method="get">
                 <table>
                     <tbody>
                     <tr>
@@ -79,10 +79,10 @@
                                     style="margin-top: 0.2cm; font-variant: normal; letter-spacing: normal; font-style: normal">
                                     <font color="#333333"><font face="Ubuntu"><font size="4" style="font-size: 16pt"><b><font
                                             size="3" style="font-size: 12pt">Pokaż tylko zawierających w nazwie</font>
-                                        <input name="name" type="text" size="23"
+                                        <input name="string" type="text" size="23"
                                                style="width: 5.6cm; height: 0.6cm; font-family: 'Ubuntu',sans-serif; font-size: 13pt; background: #dddddd"/><br/>
 
-                                        <input type="submit" name="find" value="Znajdź"
+                                        <input type="submit" value="Znajdź"
                                                style="width: 1.78cm; height: 0.6cm; font-family: 'Ubuntu'; font-size: 12pt"></b></font></font></font>
                                 </h4>
                             </div>
@@ -96,12 +96,12 @@
                                     style="margin-top: 0cm; font-variant: normal; letter-spacing: normal; font-style: normal">
                                     <font color="#333333">
                                         <label>
-                                            <input type="radio" name="kindOfClients" value="all"
-                                                   style="width: 2.49cm; height: 0.5cm; font-family: 'Ubuntu'; font-size: 12pt; font-weight: bold">
+                                            <input type="radio" name="ownerKind" value="all"
+                                                   style="width: 1.49cm; height: 0.5cm; font-family: 'Ubuntu'; font-size: 12pt; font-weight: bold">
                                             Wszyscy</label>
-                                        <input type="radio" name="kindOfClients" value="activeOnly" checked="checked"
+                                        <input type="radio" name="ownerKind" value="activeOnly" checked="checked"
                                                style="width: 2.49cm; height: 0.5cm; font-family: 'Ubuntu'; font-size: 12pt; font-weight: bold">Aktywni
-                                        <input type="radio" name="kindOfClients" value="notActiveOnly"
+                                        <input type="radio" name="ownerKind" value="notActiveOnly"
                                                style="width: 2.92cm; height: 0.5cm; font-family: 'Ubuntu'; font-size: 12pt; font-weight: bold">Nieaktywni
                                     </font>
                                 </h4>
@@ -187,8 +187,8 @@
                             style="border-top: none; border-bottom: 2.00pt solid #f58220; border-left: 2.00pt solid #f58220; border-right: none; padding-top: 0cm; padding-bottom: 0.05cm; padding-left: 0.05cm; padding-right: 0cm">
                             <p align="center" style="margin-top: 0.1cm"><font face="Ubuntu"><font size="3"
                                                                                                   style="font-size: 13pt">
-                                <a href="${pageContext.request.contextPath}/client/get?clientId=${item.id}"
-                                   name="clientDetails"><font size="3" style="font-size: 12pt">
+                                <a href="${pageContext.request.contextPath}/owner/get?ownerId=${item.id}"
+                                   name="ownerDetails"><font size="3" style="font-size: 12pt">
                                         ${item.name}</font></a></font></font></p>
                         </td>
                         <td width="154"

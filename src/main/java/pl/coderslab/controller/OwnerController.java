@@ -45,19 +45,22 @@ public class OwnerController {
         return "/owner/list";
     }
 
+
     @GetMapping("/get")
-    public String getOwner(@RequestParam String name, Model model) {
-        if (ownerRepository.findAllByNameContainingIgnoreCase(name).isPresent()) {
-            model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCase(name).get());
+    public String getOwner(@RequestParam int ownerId, Model model) {
+        if (ownerRepository.findFirstById(ownerId).isPresent()) {
+
+            model.addAttribute("owner", ownerRepository.findFirstById(ownerId).get());
+            model.addAttribute("pageTitle", "<h4>Dane klienta</h4>");
         } else return "/owner/none";
-        model.addAttribute("pageTitle", "<h4>Znalezieni klienci</h4>");
-        return "/owner/list";
+
+        return "/owner/singleowner";
     }
 
     @GetMapping("/edit")
-    public String editOwner(@RequestParam Integer clientId, Model model) {
-        if (ownerRepository.findFirstById(clientId).isPresent()) {
-            model.addAttribute("owner", ownerRepository.getOne(clientId));
+    public String editOwner(@RequestParam Integer ownerId, Model model) {
+        if (ownerRepository.findFirstById(ownerId).isPresent()) {
+            model.addAttribute("owner", ownerRepository.findFirstById(ownerId).get());
         } else return "/owner/none";
         model.addAttribute("pageTitle", "Edycja danych klienta");
         return "/owner/form";
@@ -75,26 +78,28 @@ public class OwnerController {
     }
 
     @GetMapping("/search")
-    public String searchOwner(@RequestParam String name, @RequestParam String kindOfClients, Model model) {
+    public String searchOwner(@RequestParam String string, @RequestParam String ownerKind, Model model) {
 
-        switch (kindOfClients) {
+        switch (ownerKind) {
             case "activeOnly":
-                if (ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue("name").isPresent()) {
-                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue("name").get());
+                if (ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue(string).isPresent()) {
+                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue(string).get());
+                    break;
                 }
-                break;
 
             case "notActiveOnly":
-                if (ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue("name").isPresent()) {
-                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsFalse("name"));
+                if (ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsFalse(string).isPresent()) {
+                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsFalse(string));
+                    break;
                 }
-                break;
+
 
             case "all":
-                if (ownerRepository.findAllByNameContainingIgnoreCaseAndActiveIsTrue("name").isPresent()) {
-                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCase("name"));
+                if (ownerRepository.findAllByNameContainingIgnoreCase(string).isPresent()) {
+                    model.addAttribute("owners", ownerRepository.findAllByNameContainingIgnoreCase(string));
+                    break;
                 }
-                break;
+
             default:
                 return "/owner/none";
         }

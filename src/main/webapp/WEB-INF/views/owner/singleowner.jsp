@@ -177,18 +177,18 @@
                         <div align="center">
                             <p><font color="#333333"><font face="Ubuntu"><font size="3"
                                                                                style="font-size: 13pt"><b><br/>
-                                <a href="${pageContext.request.contextPath}/machine/add?clientId=${owner.id}"><input
+                                <a href="${pageContext.request.contextPath}/machine/add?ownerId=${owner.id}"><input
                                         type="button" value="Przypisz maszyny"
                                         style="width: 4.15cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a>
-                                <a href="${pageContext.request.contextPath}/client/add"><input type="button"
-                                                                                               value="Dodaj następnego klienta"
-                                                                                               style="width: 4.97cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a>
-                                <a href="${pageContext.request.contextPath}/client/edit?clientId=${owner.id}"><input
+                                <a href="${pageContext.request.contextPath}/owner/add"><input type="button"
+                                                                                              value="Dodaj następnego klienta"
+                                                                                              style="width: 4.97cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a>
+                                <a href="${pageContext.request.contextPath}/owner/edit?ownerId=${owner.id}"><input
                                         type="button" value="Edytuj"
                                         style="width: 2.5cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a>
-                                <a href=${pageContext.request.contextPath}/client/all><input type="button"
-                                                                                             value="Powrót"
-                                                                                             style="width: 2.5cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a></b></font></font></font>
+                                <a href=${pageContext.request.contextPath}/owner/all><input type="button"
+                                                                                            value="Powrót"
+                                                                                            style="width: 2.5cm; height: 1.2cm; font-size: 13pt; background: #dddddd"/></a></b></font></font></font>
                             </p>
                         </div>
                     </td>

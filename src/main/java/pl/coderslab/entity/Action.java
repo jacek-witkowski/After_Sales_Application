@@ -1,7 +1,5 @@
 package pl.coderslab.entity;
 
-import org.hibernate.validator.constraints.SafeHtml;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;

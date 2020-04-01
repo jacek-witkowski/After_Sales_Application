@@ -1,11 +1,9 @@
 package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.URL;
-import pl.coderslab.validator.City;
 import pl.coderslab.validator.Phone;
 import pl.coderslab.validator.PostalCode;
 
-//import javax.persistence.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+
+//import javax.persistence.*;
 
 @Entity
 
@@ -25,12 +25,12 @@ public class Owner {
 
     @NotEmpty
     @Column(name = "name")
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 50)
     private String name;
 
     @Column(name = "postal_code")
     @PostalCode
-    private String postalCode; // zwalidować kod pocztowy
+    private String postalCode;
 
     @Column(name = "city")
     @NotNull
@@ -39,7 +39,7 @@ public class Owner {
     private String city;
 
     @NotNull
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 40)
     @Column(name = "street")
     private String street;
 
@@ -50,7 +50,7 @@ public class Owner {
 
     @NotNull
     @Column(name = "country")
-    private String country; // państwo wybierane z listy
+    private String country;
 
     @Email
     @Column(name = "main_email")
@@ -58,23 +58,23 @@ public class Owner {
 
     @Column(name = "main_phone")
     @Phone
-    private String mainPhone; // zwalidować!
+    private String mainPhone;
 
     @Column(name = "main_fax")
     @Phone
-    private String mainFax; // zwalidować tak jak telefon!
+    private String mainFax;
 
     @Column(name = "website")
     @URL
-    private String webSite; // zwalidować!
+    private String webSite;
 
     @Size(min = 2, max = 20)
     @Column(name = "contact_first_name")
-    private String contactFirstName; // zwalidować!
+    private String contactFirstName;
 
     @Size(min = 2, max = 30)
     @Column(name = "contact_last_name")
-    private String contactLastName; // zwalidować!
+    private String contactLastName;
 
     @Column(name = "contact_position")
     private String contactPosition;
@@ -85,11 +85,11 @@ public class Owner {
 
     @Column(name = "contact_phone")
     @Phone
-    private String contactPhone; // zwalidować!
+    private String contactPhone;
 
     @Column(name = "contact_fax")
     @Phone
-    private String contactFax; // zwalidować tak jak telefon!
+    private String contactFax;
 
     @Column(name = "active")
     private Boolean active;
